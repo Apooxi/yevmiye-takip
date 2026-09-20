@@ -26,7 +26,6 @@
         <form id="worker-form">
             <input type="text" id="worker-name" placeholder="Ad Soyad" required>
             <input type="text" id="worker-phone" placeholder="Telefon">
-            <input type="number" id="worker-wage" placeholder="Günlük Ücret">
             <button type="submit">Ekle</button>
         </form>
         <ul id="worker-list"></ul>
@@ -38,6 +37,7 @@
             <select id="record-employer" required></select>
             <select id="record-worker" required></select>
             <input type="date" id="record-date" required>
+            <input type="number" id="record-wage" placeholder="Günlük Ücret">
             <input type="text" id="record-note" placeholder="Not (opsiyonel)">
             <button type="submit">Ekle</button>
         </form>
@@ -48,6 +48,7 @@
                     <th>Tarih</th>
                     <th>İşveren</th>
                     <th>İşçi</th>
+                    <th>Günlük Ücret</th>
                     <th>Not</th>
                     <th></th>
                 </tr>

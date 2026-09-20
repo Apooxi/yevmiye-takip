@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using YevmiyeTakip.Api.Data;
 using YevmiyeTakip.Api.Models;
 
-namespace YevmiyeTakip.Api.Models
+namespace YevmiyeTakip.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -67,6 +66,7 @@ namespace YevmiyeTakip.Api.Models
             record.Date = dto.Date;
             record.EmployerId = dto.EmployerId;
             record.WorkerId = dto.WorkerId;
+            record.DailyWage = dto.DailyWage;
             record.Note = dto.Note;
 
             await _context.SaveChangesAsync();
@@ -90,6 +90,7 @@ namespace YevmiyeTakip.Api.Models
                 Date = dto.Date,
                 EmployerId = dto.EmployerId,
                 WorkerId = dto.WorkerId,
+                DailyWage = dto.DailyWage,
                 Note = dto.Note
             };
 

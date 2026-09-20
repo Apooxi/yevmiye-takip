@@ -6,10 +6,12 @@
         public DateOnly Date { get; set; }
 
         public int EmployerId { get; set; }
-        public Employer Employer { get; set; } = null;
+        public Employer Employer { get; set; } = null!;
 
         public int WorkerId { get; set; }
-        public Worker Worker { get; set; } = null;
+        public Worker Worker { get; set; } = null!;
+        
+        public decimal? DailyWage { get; set; }
 
         public string? Note { get; set; }
 

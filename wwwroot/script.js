@@ -48,7 +48,7 @@ async function loadWorkers() {
 
   workers.forEach(w => {
     const li = document.createElement("li");
-    li.textContent = `${w.fullName} - ${w.phone ?? ""} - ${w.dailyWage ?? ""}`;
+    li.textContent = `${w.fullName} - ${w.phone ?? ""}`;
     list.appendChild(li);
   });
 
@@ -63,9 +63,7 @@ document.getElementById("worker-form").addEventListener("submit", async(event) =
 
   const newWorker = {
     fullName: document.getElementById("worker-name").value,
-    phone: document.getElementById("worker-phone").value,
-    dailyWage: document.getElementById("worker-wage").value
-      ? Number(document.getElementById("worker-wage").value) : null
+    phone: document.getElementById("worker-phone").value
   };
 
   await fetch(`${API_BASE}/Workers`, {
@@ -105,9 +103,10 @@ async function loadDailyRecords() {
       <td>${r.date}</td>
       <td>${r.employer?.name ?? ""}</td>
       <td>${r.worker?.fullName ?? ""}</td>
+      <td>${r.dailyWage ?? ""}</td>
       <td>${r.note ?? ""}</td>
       <td>
-        <button onclick="startEditRecord(${r.id}, '${r.date}', ${r.employerId}, ${r.workerId}, '${(r.note ?? "").replace(/'/g, "\\'")}')">Düzenle</button>
+        <button onclick="startEditRecord(${r.id}, '${r.date}', ${r.employerId}, ${r.workerId}, ${r.dailyWage}, '${(r.note ?? "").replace(/'/g, "\\'")}')">Düzenle</button>
         <button onclick="deleteDailyRecord(${r.id})">Sil</button>
     </td>
     `;
@@ -133,6 +132,8 @@ document.getElementById("record-form").addEventListener("submit", async (event) 
     date: document.getElementById("record-date").value,
     employerId: Number(document.getElementById("record-employer").value),
     workerId: Number(document.getElementById("record-worker").value),
+    dailyWage: document.getElementById("record-wage").value
+      ? Number(document.getElementById("record-wage").value) : null,
     note: document.getElementById("record-note").value
   };
   let response;
@@ -164,12 +165,13 @@ document.getElementById("record-form").addEventListener("submit", async (event) 
   await loadDailyRecords();
 })
 
-function startEditRecord(id, date, employerId, workerId, note) {
+function startEditRecord(id, date, employerId, workerId, dailyWage, note) {
   editingRecordId = id;
 
   document.getElementById("record-date").value = date;
   document.getElementById("record-employer").value = employerId;
   document.getElementById("record-worker").value = workerId;
+  document.getElementById("record-wage").value = dailyWage;
   document.getElementById("record-note").value = note;
 
   document.querySelector("#record-form button[type='submit']").textContent = "Guncelle";

@@ -1,0 +1,17 @@
+﻿version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: yevmiye-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: "yevmiyedb"
+    ports:
+      - "5434:5432"
+    volumes:
+      - yevmiye-db-data:/var/lib/postgresql/data
+
+volumes:
+  yevmiye-db-data:
